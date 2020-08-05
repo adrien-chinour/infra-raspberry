@@ -1,0 +1,23 @@
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+  watch = true
+  exposedByDefault = false
+
+[entryPoints.web]
+  address = ":80"
+  [entryPoints.web.http.redirections.entryPoint]
+    to = "websecure"
+    scheme = "https"
+
+[entryPoints.websecure]
+  address = ":443"
+
+[certificatesResolvers.leresolver.acme]
+  email = "postmaster@chinour.fr"
+  storage = "acme.json"
+  [certificatesResolvers.leresolver.acme.httpChallenge]
+    entryPoint = "web"
+
+[api]
+  dashboard = true
+  rule = "Host(`traefik.chinour.fr`)"

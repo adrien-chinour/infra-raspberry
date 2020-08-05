@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  plex:
+    image: linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    mem_limit: 2G
+    networks:
+      - traefik_network
+    environment:
+      - PUID=1001 # TODO
+      - PGID=1001 # TODO
+      - TZ=Europe/Paris
+      - ADVERTISE_IP=plex.chinour.fr:443
+    volumes:
+      - ./config/plex:/config
+      - /mediacenter/movies:/data/movies
+      - /mediacenter/tv:/data/tv
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_network"
+      - "traefik.http.routers.plex.entrypoints=web,websecure"
+      - "traefik.http.routers.plex.rule=Host(`plex.chinour.fr`)"
+      - "traefik.http.services.plex.loadbalancer.server.port=32400"
+      - "traefik.http.routers.plex.tls=true"
+      - "traefik.http.routers.plex.tls.certresolver=leresolver"
+
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    restart: unless-stopped
+    mem_limit: 2G
+    networks:
+      - traefik_network
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1001 # TODO
+      - PGID=1001 # TODO
+    ports:
+      - "51413:51413"
+      - "51413:51413/udp"
+    volumes:
+      - ./config/transmission:/config
+      - /mediacenter:/mediacenter
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_network"
+      - "traefik.http.routers.plex.entrypoints=web,websecure"
+      - "traefik.http.routers.plex.rule=Host(`torrent.chinour.fr`)"
+      - "traefik.http.services.plex.loadbalancer.server.port=9091"
+      - "traefik.http.routers.plex.tls=true"
+      - "traefik.http.routers.plex.tls.certresolver=leresolver"
+
+networks:
+  traefik_network:
+    external: true
