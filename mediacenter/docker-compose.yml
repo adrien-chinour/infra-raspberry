@@ -8,19 +8,19 @@ services:
     networks:
       - traefik_network
     environment:
-      - PUID=1001 # TODO
-      - PGID=1001 # TODO
+      - PUID=1200
+      - PGID=1200
       - TZ=Europe/Paris
       - ADVERTISE_IP=plex.chinour.fr:443
     volumes:
       - ./config/plex:/config
-      - /mediacenter/movies:/data/movies
-      - /mediacenter/tv:/data/tv
+      - /mediastorage/films:/data/movies
+      - /mediastorage/series:/data/tv
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
       - "traefik.http.routers.plex.entrypoints=web,websecure"
-      - "traefik.http.routers.plex.rule=Host(`plex.chinour.fr`)"
+      - "traefik.http.routers.plex.rule=Host(`plex.pi.chinour.fr`)"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       - "traefik.http.routers.plex.tls=true"
       - "traefik.http.routers.plex.tls.certresolver=leresolver"
@@ -34,14 +34,14 @@ services:
       - traefik_network
     environment:
       - TZ=Europe/Paris
-      - PUID=1001 # TODO
-      - PGID=1001 # TODO
+      - PUID=1200
+      - PGID=1200
     ports:
       - "51413:51413"
       - "51413:51413/udp"
     volumes:
       - ./config/transmission:/config
-      - /mediacenter:/mediacenter
+      - /mediastorage:/mediacenter
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"

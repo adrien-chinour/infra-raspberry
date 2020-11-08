@@ -20,4 +20,4 @@
 
 [api]
   dashboard = true
-  rule = "Host(`traefik.chinour.fr`)"
+  rule = "Host(`traefik.pi.chinour.fr`)"
