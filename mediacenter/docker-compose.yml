@@ -26,7 +26,7 @@ services:
       - "traefik.http.routers.plex.tls.certresolver=leresolver"
 
   transmission:
-    image: linuxserver/transmission
+    image: linuxserver/transmission:latest
     container_name: transmission
     restart: unless-stopped
     mem_limit: 2G
@@ -45,11 +45,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.plex.entrypoints=web,websecure"
-      - "traefik.http.routers.plex.rule=Host(`torrent.chinour.fr`)"
-      - "traefik.http.services.plex.loadbalancer.server.port=9091"
-      - "traefik.http.routers.plex.tls=true"
-      - "traefik.http.routers.plex.tls.certresolver=leresolver"
+      - "traefik.http.routers.transmission.entrypoints=web,websecure"
+      - "traefik.http.routers.transmission.rule=Host(`transmission.pi.chinour.fr`)"
+      - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+      - "traefik.http.routers.transmission.tls=true"
+      - "traefik.http.routers.transmission.tls.certresolver=leresolver"
 
 networks:
   traefik_network:
