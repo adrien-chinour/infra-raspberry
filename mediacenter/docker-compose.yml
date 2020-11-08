@@ -36,6 +36,8 @@ services:
       - TZ=Europe/Paris
       - PUID=1200
       - PGID=1200
+      - PLEX_CLAIM=claim-go-here
+      - ADVERTISE_IP=plex.ip.chinour.fr:443
     ports:
       - "51413:51413"
       - "51413:51413/udp"
