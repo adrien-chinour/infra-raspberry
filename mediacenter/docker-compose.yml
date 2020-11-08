@@ -41,7 +41,7 @@ services:
       - "51413:51413/udp"
     volumes:
       - ./config/transmission:/config
-      - /mediastorage:/mediacenter
+      - /mediastorage:/mediastorage
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
