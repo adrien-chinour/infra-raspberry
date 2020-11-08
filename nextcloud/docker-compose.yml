@@ -2,12 +2,8 @@ version: '3.7'
 services:
   nextcloudpi:
     restart: unless-stopped
-    image: ownyourbits/nextcloudpi-x86
+    image: ownyourbits/nextcloudpi
     command: "nextcloud.pi.chinour.fr"
-    ports:
-     - "80:80"
-     - "443:443"
-     - "4443:4443"
     networks:
       - traefik_network
     volumes:
