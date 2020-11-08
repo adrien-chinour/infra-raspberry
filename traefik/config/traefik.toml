@@ -25,5 +25,5 @@
             caServer = "https://acme-v01.api.letsencrypt.org/directory"
         [certificatesResolvers.default.acme.tlsChallenge]
 [api]
-dashboard = true
-rule = "Host(`traefik.pi.chinour.fr`)"
+    dashboard = true
+    insecure = true
