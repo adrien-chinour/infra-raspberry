@@ -30,7 +30,7 @@ services:
       MYSQL_PASSWORD_FILE: '/run/secrets/mysql-password'
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
       NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
-      NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
+      NEXTCLOUD_TRUSTED_DOMAINS: nextcloud.pi.chinour.fr
     secrets:
       - mysql-user
       - mysql-database
