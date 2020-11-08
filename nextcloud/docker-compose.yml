@@ -1,66 +1,28 @@
 version: '3.7'
 services:
-  database:
-    image: jsurf/rpi-raspbian:latest
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+  nextcloudpi:
     restart: unless-stopped
-    environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      MYSQL_USER_FILE: '/run/secrets/mysql-user'
-      MYSQL_DATABASE_FILE: '/run/secrets/mysql-database'
-      MYSQL_PASSWORD_FILE: '/run/secrets/mysql-password'
-    secrets:
-      - mysql-user
-      - mysql-database
-      - mysql-password
-    networks:
-      - lan 
-    volumes: 
-      - /var/db:/var/lib/mysql
-
-  nextcloud:
-    depends_on:
-      - database
-    image: nextcloud:18
-    restart: unless-stopped
-    environment:
-      MYSQL_HOST: 'database'
-      MYSQL_DATABASE_FILE: '/run/secrets/mysql-database'
-      MYSQL_USER_FILE: '/run/secrets/mysql-user'
-      MYSQL_PASSWORD_FILE: '/run/secrets/mysql-password'
-      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
-      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
-      NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_URL}
-    secrets:
-      - mysql-user
-      - mysql-database
-      - mysql-password
+    image: ownyourbits/nextcloudpi-x86
+    command: "nextcloud.pi.chinour.fr"
+    ports:
+     - "80:80"
+     - "443:443"
+     - "4443:4443"
     networks:
       - traefik_network
-      - lan
     volumes:
-      - /cloud/html:/var/www/html
+     - /cloud:/data
+     - /etc/localtime:/etc/localtime:ro
+    container_name: nextcloudpi
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.transmission.entrypoints=web,websecure"
-      - "traefik.http.routers.transmission.rule=Host(`${NEXTCLOUD_URL}`)"
-      - "traefik.http.services.transmission.loadbalancer.server.port=80"
-      - "traefik.http.routers.transmission.tls=true"
-      - "traefik.http.routers.transmission.tls.certresolver=acme"
-    env_file:
-      - ./.env
+      - "traefik.http.routers.nextcloud.entrypoints=web,websecure"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.pi.chinour.fr`)"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+      - "traefik.http.services.nextcloud.loadbalancer.server.port=443"
+      - "traefik.http.routers.nextcloud.tls=true"
+      - "traefik.http.routers.nextcloud.tls.certresolver=acme"
 networks:
   traefik_network:
     external: true
-  lan:
-
-secrets:
-  mysql-user:
-    file: ./secrets/mysql-user.txt
-
-  mysql-database:
-    file: ./secrets/mysql-database.txt
-
-  mysql-password:
-    file: ./secrets/mysql-password.txt
