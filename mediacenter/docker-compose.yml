@@ -11,7 +11,7 @@ services:
       - PUID=1200
       - PGID=1200
       - TZ=Europe/Paris
-      - ADVERTISE_IP=plex.chinour.fr:443
+      - ADVERTISE_IP=plex.pi.chinour.fr:443
     volumes:
       - ./config/plex:/config
       - /mediastorage/films:/data/movies
@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.plex.rule=Host(`plex.pi.chinour.fr`)"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       - "traefik.http.routers.plex.tls=true"
-      - "traefik.http.routers.plex.tls.certresolver=leresolver"
+      - "traefik.http.routers.plex.tls.certresolver=default"
 
   transmission:
     image: linuxserver/transmission:latest
@@ -36,8 +36,6 @@ services:
       - TZ=Europe/Paris
       - PUID=1200
       - PGID=1200
-      - PLEX_CLAIM=claim-go-here
-      - ADVERTISE_IP=plex.ip.chinour.fr:443
     ports:
       - "51413:51413"
       - "51413:51413/udp"
@@ -51,7 +49,7 @@ services:
       - "traefik.http.routers.transmission.rule=Host(`transmission.pi.chinour.fr`)"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
       - "traefik.http.routers.transmission.tls=true"
-      - "traefik.http.routers.transmission.tls.certresolver=leresolver"
+      - "traefik.http.routers.transmission.tls.certresolver=default"
 
 networks:
   traefik_network:
