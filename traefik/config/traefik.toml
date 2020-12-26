@@ -15,7 +15,7 @@
     [entryPoints.websecure]
         address = ":443"
             [entryPoints.websecure.http.tls]
-                certResolver = "default"
+                certResolver = "myresolver"
 
 [certificatesResolvers]
     [certificatesResolvers.myresolver]
@@ -23,7 +23,8 @@
             email = "adrien@chinour.fr"
             storage = "acme.json"
             caServer = "https://acme-v01.api.letsencrypt.org/directory"
-        [certificatesResolvers.myresolver.acme.tlsChallenge]
+            [certificatesResolvers.myresolver.acme.httpChallenge]
+                entryPoint = "websecure"
 [api]
     dashboard = true
     insecure = true
