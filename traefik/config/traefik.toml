@@ -22,8 +22,7 @@
         [certificatesResolvers.myresolver.acme]
             email = "adrien@chinour.fr"
             storage = "acme.json"
-            [certificatesResolvers.myresolver.acme.httpChallenge]
-                entryPoint = "web"
+            [certificatesResolvers.myresolver.acme.tlsChallenge]
 [api]
     dashboard = true
     insecure = true
