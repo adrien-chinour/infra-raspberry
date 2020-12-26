@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.plex.rule=Host(`plex.pi.chinour.fr`)"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       - "traefik.http.routers.plex.tls=true"
-      - "traefik.http.routers.plex.tls.certresolver=default"
+      - "traefik.http.routers.plex.tls.certresolver=myresolver"
 
   transmission:
     image: linuxserver/transmission:latest
@@ -49,7 +49,7 @@ services:
       - "traefik.http.routers.transmission.rule=Host(`transmission.pi.chinour.fr`)"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
       - "traefik.http.routers.transmission.tls=true"
-      - "traefik.http.routers.transmission.tls.certresolver=default"
+      - "traefik.http.routers.transmission.tls.certresolver=myresolver"
 
 networks:
   traefik_network:

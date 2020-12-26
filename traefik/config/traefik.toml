@@ -18,12 +18,12 @@
                 certResolver = "default"
 
 [certificatesResolvers]
-    [certificatesResolvers.default]
-        [certificatesResolvers.default.acme]
+    [certificatesResolvers.myresolver]
+        [certificatesResolvers.myresolver.acme]
             email = "adrien@chinour.fr"
             storage = "acme.json"
             caServer = "https://acme-v01.api.letsencrypt.org/directory"
-        [certificatesResolvers.default.acme.tlsChallenge]
+        [certificatesResolvers.myresolver.acme.tlsChallenge]
 [api]
     dashboard = true
     insecure = true
