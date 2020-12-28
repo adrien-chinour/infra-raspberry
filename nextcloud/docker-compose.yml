@@ -2,7 +2,7 @@ version: '3.7'
 services:
     database:
         image: jsurf/rpi-mariadb:latest
-        command: --transaction-isolation: 'READ-COMMITTED --binlog-format: 'ROW
+        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
         restart: unless-stopped
         environment:
             MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
