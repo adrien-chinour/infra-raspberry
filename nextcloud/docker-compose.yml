@@ -2,7 +2,7 @@ version: '3.7'
 services:
     database:
         image: jsurf/rpi-mariadb:latest
-        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+        command: --transaction-isolation: 'READ-COMMITTED --binlog-format: 'ROW
         restart: unless-stopped
         environment:
             MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
@@ -33,11 +33,18 @@ services:
         volumes:
             - html:/var/www/html
         labels:
-            traefik.enable: true
-            traefik.docker.network: traefik_network
-            traefik.http.routers.nextcloud.entrypoints: websecure
+            traefik.enable: 'true'
+            traefik.docker.network: 'traefik_network'
+            traefik.http.routers.nextcloud.entrypoints: 'websecure'
             traefik.http.routers.nextcloud.rule: 'Host(`nextcloud.pi.chinour.fr`)'
-            traefik.http.services.nextcloud.loadbalancer.server.port: 80
+            traefik.http.middlewares.nc-header.headers.referrerPolicy: 'no-referrer'
+            traefik.http.middlewares.nc-header.headers.stsSeconds: '31536000'
+            traefik.http.middlewares.nc-header.headers.forceSTSHeader: 'true'
+            traefik.http.middlewares.nc-header.headers.stsPreload: 'true'
+            traefik.http.middlewares.nc-header.headers.stsIncludeSubdomains: 'true'
+            traefik.http.middlewares.nc-header.headers.browserXssFilter: 'true'
+            traefik.http.middlewares.nc-header.headers.customRequestHeaders.X-Forwarded-Proto: 'https'
+            traefik.http.routers.nextcloud-secure.middlewares: 'nextcloud-rep,nc-header'
 
 volumes:
     db:
