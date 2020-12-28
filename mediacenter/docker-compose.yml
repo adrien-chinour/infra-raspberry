@@ -19,7 +19,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.plex.entrypoints=web,websecure"
+      - "traefik.http.routers.plex.entrypoints=websecure"
       - "traefik.http.routers.plex.rule=Host(`plex.pi.chinour.fr`)"
       - "traefik.http.services.plex.loadbalancer.server.port=32400"
       - "traefik.http.routers.plex.tls=true"
@@ -45,7 +45,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.transmission.entrypoints=web,websecure"
+      - "traefik.http.routers.transmission.entrypoints=websecure"
       - "traefik.http.routers.transmission.rule=Host(`transmission.pi.chinour.fr`)"
       - "traefik.http.services.transmission.loadbalancer.server.port=9091"
       - "traefik.http.routers.transmission.tls=true"
