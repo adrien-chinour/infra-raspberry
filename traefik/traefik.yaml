@@ -26,10 +26,10 @@ providers:
 certificatesResolvers:
     myresolver:
         acme:
-            email: "adrien@chinour.fr"
-            storage: "/letsencrypt/acme.json"
+            email: 'adrien@chinour.fr'
+            storage: '/letsencrypt/acme.json'
             caserver: 'https://acme-staging-v02.api.letsencrypt.org/directory'
-            tlsChallenge: { }
+            tlsChallenge: 'true'
 
 api:
     dashboard: true
