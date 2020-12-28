@@ -1,20 +1,23 @@
 version: '3.7'
 services:
-  traefik:
-    image: "traefik:v2.2"
-    container_name: "traefik"
-    restart: unless-stopped
-    networks:
-      - traefik_network
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik.toml:/traefik.toml:ro
-      - ./config/acme.json:/acme.json
+    reverse_proxy:
+        image: traefik:2.2
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
+            - ./custom:/etc/traefik/custom:ro
+            - certs:/letsencrypt
+        networks:
+            - traefik_network
+
+volumes:
+    certs:
 
 networks:
-  traefik_network:
-    external: true
+    traefik_network:
+        external: true

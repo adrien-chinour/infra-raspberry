@@ -1,23 +1,49 @@
 version: '3.7'
 services:
-  nextcloudpi:
-    restart: unless-stopped
-    image: ownyourbits/nextcloudpi
-    command: "nextcloud.pi.chinour.fr"
-    networks:
-      - traefik_network
-    volumes:
-     - /cloud:/data
-     - /etc/localtime:/etc/localtime:ro
-    container_name: nextcloudpi
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.nextcloud.entrypoints=web,websecure"
-      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.pi.chinour.fr`)"
-      - "traefik.http.services.nextcloud.loadbalancer.server.port=443"
-      - "traefik.http.routers.nextcloud.tls=true"
-      - "traefik.http.routers.nextcloud.tls.certresolver=myresolver"
+    database:
+        image: jsurf/rpi-raspbian:10
+        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+        restart: unless-stopped
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+            MYSQL_DATABASE_FILE: 'nextcloud'
+            MYSQL_USER_FILE: 'nextcloud_user'
+            MYSQL_PASSWORD_FILE: 'YuV64P_pMH{ftb#$'
+        networks:
+            - lan
+        volumes:
+            - db:/var/lib/mysql
+
+    nextcloud:
+        depends_on:
+            - database
+        image: nextcloud:18
+        restart: unless-stopped
+        environment:
+            MYSQL_HOST: 'database'
+            MYSQL_DATABASE_FILE: 'nextcloud'
+            MYSQL_USER_FILE: 'nextcloud_user'
+            MYSQL_PASSWORD_FILE: 'YuV64P_pMH{ftb#$'
+            NEXTCLOUD_ADMIN_PASSWORD: 'YuV64P_pMH{ftb#$'
+            NEXTCLOUD_ADMIN_USER: 'adrien'
+            NEXTCLOUD_TRUSTED_DOMAINS: 'nextcloud.pi.chinour.fr'
+        networks:
+            - lan
+            - traefik_network
+        volumes:
+            - html:/var/www/html
+        labels:
+            traefik.enable: true
+            traefik.docker.network: traefik_network
+            traefik.http.routers.nextcloud.entrypoints: websecure
+            traefik.http.routers.nextcloud.rule: 'Host(`nextcloud.pi.chinour.fr`)'
+            traefik.http.services.nextcloud.loadbalancer.server.port: 80
+
+volumes:
+    db:
+    html:
+
 networks:
-  traefik_network:
-    external: true
+    traefik_network:
+        external: true
+    lan:
