@@ -12,7 +12,7 @@ entryPoints:
             tls:
                 certResolver: myresolver
             middlewares:
-                - SecHeaders@file
+                - secHeaders@file
 
 accessLog: { }
 
