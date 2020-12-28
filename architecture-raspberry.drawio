@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-08-05T10:18:50.643Z" agent="5.0 (X11)" etag="ag4SoZoXU1scSlo0CPVx" version="13.6.0" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2020-12-28T22:21:39.340Z" agent="5.0 (X11)" etag="1X2AZG_ekGYdJqPWSI6G" version="14.1.3" type="github" pages="3">
   <diagram id="dey2-_UVM89Uw2qqdMOH" name="Hardware">
-    <mxGraphModel dx="1422" dy="936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" extFonts="Roboto^https://fonts.googleapis.com/css?family=Roboto">
+    <mxGraphModel dx="1886" dy="874" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" extFonts="Roboto^https://fonts.googleapis.com/css?family=Roboto">
       <root>
         <mxCell id="Rhs4_uoNjugDsGz7mm6r-0" />
         <mxCell id="Rhs4_uoNjugDsGz7mm6r-1" parent="Rhs4_uoNjugDsGz7mm6r-0" />
@@ -51,7 +51,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="S9LHNPRBm1qsJoPzYEcS" name="Software">
-    <mxGraphModel dx="2249" dy="936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" extFonts="Roboto^https://fonts.googleapis.com/css?family=Roboto">
+    <mxGraphModel dx="2713" dy="874" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0" extFonts="Roboto^https://fonts.googleapis.com/css?family=Roboto">
       <root>
         <mxCell id="5jvU46u17jYDR4MZLt9F-0" />
         <mxCell id="5jvU46u17jYDR4MZLt9F-1" parent="5jvU46u17jYDR4MZLt9F-0" />
@@ -172,7 +172,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="29A75E-vHud8_DeC_cHA" name="Storage">
-    <mxGraphModel dx="1422" dy="936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1886" dy="874" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="fNHqkD8roJVdE6ToBNQt-0" />
         <mxCell id="fNHqkD8roJVdE6ToBNQt-1" parent="fNHqkD8roJVdE6ToBNQt-0" />
@@ -250,14 +250,6 @@
         <mxCell id="in0z_yOwO505gRJk_PaX-3" value="RSync" style="pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.intune.update;labelBackgroundColor=#ffffff;fontFamily=Roboto;fontSize=12;fontColor=#000000;opacity=90;" parent="fNHqkD8roJVdE6ToBNQt-1" vertex="1">
           <mxGeometry x="767" y="250" width="30" height="30" as="geometry" />
         </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="O7zFDTXJFBvXXdTgzJW9" name="Nextcloud">
-    <mxGraphModel dx="1422" dy="936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-      <root>
-        <mxCell id="6B3kbKo4kwTgMAzvlCk2-0" />
-        <mxCell id="6B3kbKo4kwTgMAzvlCk2-1" parent="6B3kbKo4kwTgMAzvlCk2-0" />
       </root>
     </mxGraphModel>
   </diagram>
