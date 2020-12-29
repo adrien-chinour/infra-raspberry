@@ -1,2 +1,9 @@
 .idea
+
 nextcloud/.env
+
+mediacenter/.env
+mediacenter/config/plex/*
+mediacenter/config/transmission/*
+!mediacenter/config/plex/.gitkeep
+!mediacenter/config/transmission/settings.json

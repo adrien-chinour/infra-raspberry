@@ -1,56 +1,56 @@
 version: '3.7'
 services:
-  plex:
-    image: linuxserver/plex:latest
-    container_name: plex
-    restart: unless-stopped
-    mem_limit: 2G
-    networks:
-      - traefik_network
-    environment:
-      - PUID=1200
-      - PGID=1200
-      - TZ=Europe/Paris
-      - ADVERTISE_IP=plex.pi.chinour.fr:443
-    volumes:
-      - ./config/plex:/config
-      - /mediastorage/films:/data/movies
-      - /mediastorage/series:/data/tv
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.plex.entrypoints=websecure"
-      - "traefik.http.routers.plex.rule=Host(`plex.pi.chinour.fr`)"
-      - "traefik.http.services.plex.loadbalancer.server.port=32400"
-      - "traefik.http.routers.plex.tls=true"
-      - "traefik.http.routers.plex.tls.certresolver=myresolver"
+    plex:
+        image: linuxserver/plex:latest
+        container_name: plex
+        restart: unless-stopped
+        mem_limit: 2G
+        networks:
+            - traefik_network
+        environment:
+            - "PUID=1200"
+            - "PGID=1200"
+            - "TZ=Europe/Paris"
+            - "ADVERTISE_IP=${TRANSMISSION_HOST}:443"
+        volumes:
+            - ./config/plex:/config
+            - /mediastorage/films:/data/movies
+            - /mediastorage/series:/data/tv
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=traefik_network"
+            - "traefik.http.routers.plex.entrypoints=websecure"
+            - "traefik.http.routers.plex.rule=Host(`${PLEX_HOST}`)"
+            - "traefik.http.services.plex.loadbalancer.server.port=32400"
+            - "traefik.http.routers.plex.tls=true"
+            - "traefik.http.routers.plex.tls.certresolver=myresolver"
 
-  transmission:
-    image: linuxserver/transmission:latest
-    container_name: transmission
-    restart: unless-stopped
-    mem_limit: 2G
-    networks:
-      - traefik_network
-    environment:
-      - TZ=Europe/Paris
-      - PUID=1200
-      - PGID=1200
-    ports:
-      - "51413:51413"
-      - "51413:51413/udp"
-    volumes:
-      - ./config/transmission:/config
-      - /mediastorage:/mediastorage
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik_network"
-      - "traefik.http.routers.transmission.entrypoints=websecure"
-      - "traefik.http.routers.transmission.rule=Host(`transmission.pi.chinour.fr`)"
-      - "traefik.http.services.transmission.loadbalancer.server.port=9091"
-      - "traefik.http.routers.transmission.tls=true"
-      - "traefik.http.routers.transmission.tls.certresolver=myresolver"
+    transmission:
+        image: linuxserver/transmission:latest
+        container_name: transmission
+        restart: unless-stopped
+        mem_limit: 2G
+        networks:
+            - traefik_network
+        environment:
+            - "TZ=Europe/Paris"
+            - "PUID=1200"
+            - "PGID=1200"
+        ports:
+            - "51413:51413"
+            - "51413:51413/udp"
+        volumes:
+            - ./config/transmission:/config
+            - /mediastorage:/mediastorage
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=traefik_network"
+            - "traefik.http.routers.transmission.entrypoints=websecure"
+            - "traefik.http.routers.transmission.rule=Host(`${TRANSMISSION_HOST}`)"
+            - "traefik.http.services.transmission.loadbalancer.server.port=9091"
+            - "traefik.http.routers.transmission.tls=true"
+            - "traefik.http.routers.transmission.tls.certresolver=myresolver"
 
 networks:
-  traefik_network:
-    external: true
+    traefik_network:
+        external: true
