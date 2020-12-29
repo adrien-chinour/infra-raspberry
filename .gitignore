@@ -6,4 +6,4 @@ mediacenter/.env
 mediacenter/config/plex/*
 mediacenter/config/transmission/*
 !mediacenter/config/plex/.gitkeep
-!mediacenter/config/transmission/settings.json
+!mediacenter/config/transmission/settings.json.dist

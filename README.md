@@ -42,10 +42,11 @@ api:
 
 > Un répertoire */mediastorage/films* contient la bibliothèque de films et */mediastorage/series* les séries.
 
-> TODO ajouter info sur config transmission (user/password etc)
+4. Copier le fichier `config/transmission/settings.json.dist` dans `config/transmission/settings.json`
+   et modifier l'identifiant et le mot de passe
 
-4. Copier `.env.dist` dans `.env` et mettre à jour les variables.
-5. Démarrer le service : `docker-compose up -d`
+5. Copier `.env.dist` dans `.env` et mettre à jour les variables.
+6. Démarrer le service : `docker-compose up -d`
 
 > Pour valider la connexion avec Plex il faut mettre à jour la variable d'environnement PLEX_CLAIM
 > avec un claim récupérable [ici](https://www.plex.tv/claim/).
