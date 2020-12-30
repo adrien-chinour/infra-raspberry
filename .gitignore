@@ -1,9 +1,13 @@
 .idea
 
 nextcloud/.env
-
+dashboard/.env
 mediacenter/.env
+
 mediacenter/config/plex/*
 mediacenter/config/transmission/*
 !mediacenter/config/plex/.gitkeep
 !mediacenter/config/transmission/settings.json.dist
+
+dashboard/docker-compose.override.yaml
+nextcloud/docker-compose.override.yaml

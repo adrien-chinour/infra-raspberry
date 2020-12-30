@@ -4,7 +4,6 @@ services:
         image: linuxserver/plex:latest
         container_name: plex
         restart: unless-stopped
-        mem_limit: 2G
         networks:
             - traefik_network
         environment:
@@ -29,7 +28,6 @@ services:
         image: linuxserver/transmission:latest
         container_name: transmission
         restart: unless-stopped
-        mem_limit: 2G
         networks:
             - traefik_network
         environment:

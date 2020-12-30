@@ -5,8 +5,8 @@ services:
         command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
         restart: unless-stopped
         environment:
-            PUID: '1200'
-            PGID: '1200'
+            PUID: '1300'
+            PGID: '1300'
             TZ: 'Europe/Paris'
             MYQL_RANDOM_ROOT_PASSWORD: 'yes'
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -23,8 +23,8 @@ services:
         image: nextcloud:18
         restart: unless-stopped
         environment:
-            PUID: '1200'
-            PGID: '1200'
+            PUID: '1300'
+            PGID: '1300'
             TZ: 'Europe/Paris'
             MYSQL_HOST: 'database'
             MYSQL_DATABASE: ${MYSQL_DATABASE}
