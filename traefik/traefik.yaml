@@ -12,7 +12,8 @@ entryPoints:
             tls:
                 certResolver: myresolver
             middlewares:
-                - secHeaders@file
+                - security-headers@file
+                - https-redirect@file
 
 accessLog: { }
 

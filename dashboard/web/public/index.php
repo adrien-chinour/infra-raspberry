@@ -15,6 +15,11 @@ if ($_SERVER['APP_DEBUG']) {
     Debug::enable();
 }
 
+Request::setTrustedProxies(
+    ['127.0.0.1', 'REMOTE_ADDR'],
+    Request::HEADER_X_FORWARDED_TRAEFIK
+);
+
 $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

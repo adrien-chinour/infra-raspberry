@@ -1,6 +1,6 @@
 http:
     middlewares:
-        secHeaders:
+        security-headers:
             headers:
                 browserXssFilter: true
                 contentTypeNosniff: true
@@ -10,3 +10,12 @@ http:
                 stsPreload: true
                 stsSeconds: 31536000
                 customFrameOptionsValue: "SAMEORIGIN"
+        https-redirect:
+            redirectScheme:
+                scheme: https
+        authentication:
+            forwardAuth:
+                trustForwardHeader: true
+                tls:
+                    insecureSkipVerify: true
+                address: 'https://start.domain.lo/is_logged'

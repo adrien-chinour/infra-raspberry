@@ -48,6 +48,7 @@ services:
             - "traefik.http.services.transmission.loadbalancer.server.port=9091"
             - "traefik.http.routers.transmission.tls=true"
             - "traefik.http.routers.transmission.tls.certresolver=myresolver"
+            - "traefik.http.routers.transmission.middlewares=authentication@file"
 
 networks:
     traefik_network:
