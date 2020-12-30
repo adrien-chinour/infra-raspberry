@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     plex:
-        image: linuxserver/plex:latest
+        image: ghcr.io/linuxserver/plex:latest
         container_name: plex
         restart: unless-stopped
         networks:
@@ -12,7 +12,7 @@ services:
             - "TZ=Europe/Paris"
             - "ADVERTISE_IP=${TRANSMISSION_HOST}:443"
         volumes:
-            - ./config/plex:/config
+            - plex:/config
             - /mediastorage/films:/data/movies
             - /mediastorage/series:/data/tv
         labels:
@@ -25,20 +25,23 @@ services:
             - "traefik.http.routers.plex.tls.certresolver=myresolver"
 
     transmission:
-        image: linuxserver/transmission:latest
+        image: ghcr.io/linuxserver/transmission:latest
         container_name: transmission
         restart: unless-stopped
         networks:
             - traefik_network
+            - lan
         environment:
             - "TZ=Europe/Paris"
             - "PUID=1200"
             - "PGID=1200"
         ports:
+            - "9091:9091"
             - "51413:51413"
             - "51413:51413/udp"
         volumes:
-            - ./config/transmission:/config
+            - transmission:/config
+            - ./config/settings.json:/config/settings.json
             - /mediastorage:/mediastorage
         labels:
             - "traefik.enable=true"
@@ -50,6 +53,68 @@ services:
             - "traefik.http.routers.transmission.tls.certresolver=myresolver"
             - "traefik.http.routers.transmission.middlewares=authentication@file"
 
+    radarr:
+        image: ghcr.io/linuxserver/radarr
+        container_name: radarr
+        restart: unless-stopped
+        networks:
+            - traefik_network
+            - lan
+        environment:
+            - PUID=1200
+            - PGID=1200
+            - TZ=Europe/Paris
+            - UMASK_SET=022 #optional
+        volumes:
+            - radarr:/config
+            - /mediastorage/films:/movies
+            - /mediastorage/films:/downloads
+        ports:
+            - 7878:7878
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=traefik_network"
+            - "traefik.http.routers.radarr.entrypoints=websecure"
+            - "traefik.http.routers.radarr.rule=Host(`${RADARR_HOST}`)"
+            - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+            - "traefik.http.routers.radarr.tls=true"
+            - "traefik.http.routers.radarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.radarr.middlewares=authentication@file"
+
+    sonarr:
+        image: ghcr.io/linuxserver/sonarr
+        container_name: sonarr
+        restart: unless-stopped
+        networks:
+            - traefik_network
+            - lan
+        environment:
+            - PUID=1200
+            - PGID=1200
+            - TZ=Europe/Paris
+            - UMASK_SET=022 #optional
+        volumes:
+            - sonarr:/config
+            - /mediastorage/series:/tv
+            - /mediastorage/series:/downloads
+        ports:
+            - 8989:8989
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=traefik_network"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.rule=Host(`${SONARR_HOST}`)"
+            - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+            - "traefik.http.routers.sonarr.tls=true"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.sonarr.middlewares=authentication@file"
+volumes:
+    radarr:
+    sonarr:
+    plex:
+    transmission:
+
 networks:
     traefik_network:
         external: true
+    lan:
