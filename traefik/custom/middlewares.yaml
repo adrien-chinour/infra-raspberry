@@ -18,4 +18,4 @@ http:
                 trustForwardHeader: true
                 tls:
                     insecureSkipVerify: true
-                address: 'https://start.domain.lo/is_logged'
+                address: 'https://start.domain.lo/'

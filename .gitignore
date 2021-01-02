@@ -8,3 +8,5 @@ dashboard/docker-compose.override.yaml
 
 mediacenter/.env
 mediacenter/config/settings.json
+
+traefik/.env
