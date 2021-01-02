@@ -30,7 +30,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/is_logged", name="app_is_logged")
+     * @Route("/is_logged", name="app_logged")
      */
     public function check(Security $security)
     {
