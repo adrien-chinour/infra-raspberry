@@ -10,7 +10,6 @@ services:
             - "PUID=1200"
             - "PGID=1200"
             - "TZ=Europe/Paris"
-            - "ADVERTISE_IP=${TRANSMISSION_HOST}:443"
         volumes:
             - plex:/config
             - /mediastorage/films:/data/movies
