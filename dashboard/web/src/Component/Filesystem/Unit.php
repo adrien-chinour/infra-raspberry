@@ -39,5 +39,4 @@ class Unit
 
         return array_keys(self::$all, $unit)[0];
     }
-
 }

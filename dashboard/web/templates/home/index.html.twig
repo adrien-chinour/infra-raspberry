@@ -7,7 +7,8 @@
 
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated {{ storages.media.charge > 75 ? 'bg-warning' : 'bg-info' }}"
-                     role="progressbar" aria-valuenow="{{ storages.media.charge }}" aria-valuemin="0" aria-valuemax="100"
+                     role="progressbar" aria-valuenow="{{ storages.media.charge }}" aria-valuemin="0"
+                     aria-valuemax="100"
                      style="width: {{ storages.media.charge }}%">
                     {{ storages.media.free_space }} / {{ storages.media.total_space }} ({{ storages.media.charge }} %)
                 </div>
@@ -37,6 +38,12 @@
                     <small>({{ radarr_url }})</small>
                     <span class="badge rounded-pill bg-success">Online</span>
                 </a>
+                <a href="{{ jackett_url }}" target="_blank" class="btn btn-outline-dark">
+                    <img src="{{ asset('build/jackett.png') }}" height="20px" width="auto" alt=""/>
+                    <strong>Jackett</strong>
+                    <small>({{ jackett_url }})</small>
+                    <span class="badge rounded-pill bg-success">Online</span>
+                </a>
             </div>
         </section>
 
@@ -45,7 +52,8 @@
 
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated {{ storages.cloud.charge > 75 ? 'bg-warning' : 'bg-info' }}"
-                     role="progressbar" aria-valuenow="{{ storages.cloud.charge }}" aria-valuemin="0" aria-valuemax="100"
+                     role="progressbar" aria-valuenow="{{ storages.cloud.charge }}" aria-valuemin="0"
+                     aria-valuemax="100"
                      style="width: {{ storages.cloud.charge }}%">
                     {{ storages.cloud.free_space }} / {{ storages.cloud.total_space }} ({{ storages.cloud.charge }} %)
                 </div>

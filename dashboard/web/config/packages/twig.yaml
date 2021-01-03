@@ -5,3 +5,4 @@ twig:
         plex_url: '%app.plex_url%'
         sonarr_url: '%app.sonarr_url%'
         radarr_url: '%app.radarr_url%'
+        jackett_url: '%app.jackett_url%'
