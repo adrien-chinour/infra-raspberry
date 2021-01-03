@@ -3,24 +3,52 @@
 {% block content %}
     <main class="container">
         <section class="my-3 p-3 bg-white rounded shadow-sm">
-            <h5 class="border-bottom pb-2 mb-0">Mediacenter</h5>
+            <h5 class="border-bottom pb-2 mb-2">Mediacenter</h5>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated {{ storages.media.charge > 75 ? 'bg-warning' : 'bg-info' }}"
+                     role="progressbar" aria-valuenow="{{ storages.media.charge }}" aria-valuemin="0" aria-valuemax="100"
+                     style="width: {{ storages.media.charge }}%">
+                    {{ storages.media.free_space }} / {{ storages.media.total_space }} ({{ storages.media.charge }} %)
+                </div>
+            </div>
             <div class="d-grid gap-2 mt-2">
-                <a href="{{ transmission_url }}" target="_blank" class="btn btn-outline-dark btn-lg">
+                <a href="{{ transmission_url }}" target="_blank" class="btn btn-outline-dark">
                     <img src="{{ asset('build/transmission.svg') }}" height="20px" width="auto" alt=""/>
-                    Transmission
+                    <strong>Transmission</strong>
+                    <small>({{ transmission_url }})</small>
+                    <span class="badge rounded-pill bg-success">Online</span>
                 </a>
-                <a href="{{ plex_url }}" target="_blank" class="btn btn-outline-dark btn-lg">
+                <a href="{{ plex_url }}" target="_blank" class="btn btn-outline-dark">
                     <img src="{{ asset('build/plex.svg') }}" height="20px" width="auto" alt=""/>
-                    Plex
+                    <strong>Plex</strong>
+                    <small>({{ plex_url }})</small>
+                    <span class="badge rounded-pill bg-success">Online</span>
                 </a>
-                <a href="{{ sonarr_url }}" target="_blank" class="btn btn-outline-dark btn-lg">
+                <a href="{{ sonarr_url }}" target="_blank" class="btn btn-outline-dark">
                     <img src="{{ asset('build/sonarr.svg') }}" height="20px" width="auto" alt=""/>
-                    Sonarr
+                    <strong>Sonarr</strong>
+                    <small>({{ sonarr_url }})</small>
+                    <span class="badge rounded-pill bg-success">Online</span>
                 </a>
-                <a href="{{ radarr_url }}" target="_blank" class="btn btn-outline-dark btn-lg">
+                <a href="{{ radarr_url }}" target="_blank" class="btn btn-outline-dark">
                     <img src="{{ asset('build/radarr.svg') }}" height="20px" width="auto" alt=""/>
-                    Radarr
+                    <strong>Radarr</strong>
+                    <small>({{ radarr_url }})</small>
+                    <span class="badge rounded-pill bg-success">Online</span>
                 </a>
+            </div>
+        </section>
+
+        <section class="my-3 p-3 bg-white rounded shadow-sm">
+            <h5 class="border-bottom pb-2 mb-2">Nextcloud</h5>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated {{ storages.cloud.charge > 75 ? 'bg-warning' : 'bg-info' }}"
+                     role="progressbar" aria-valuenow="{{ storages.cloud.charge }}" aria-valuemin="0" aria-valuemax="100"
+                     style="width: {{ storages.cloud.charge }}%">
+                    {{ storages.cloud.free_space }} / {{ storages.cloud.total_space }} ({{ storages.cloud.charge }} %)
+                </div>
             </div>
         </section>
     </main>

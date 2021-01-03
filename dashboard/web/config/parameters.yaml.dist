@@ -1,0 +1,7 @@
+parameters:
+    app.transmission_url: 'https://dl.example.com'
+    app.plex_url: 'https://vod.example.com'
+    app.sonarr_url: 'https://sonarr.example.com'
+    app.radarr_url: 'https://radarr.example.com'
+    app.mediastorage: '/mediastorage'
+    app.cloudstorage: '/cloud'
