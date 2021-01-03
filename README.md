@@ -48,8 +48,7 @@ api:
 5. Copier `.env.dist` dans `.env` et mettre à jour les variables.
 6. Démarrer le service : `docker-compose up -d`
 
-> Pour valider la connexion avec Plex il faut mettre à jour la variable d'environnement PLEX_CLAIM
-> avec un claim récupérable [ici](https://www.plex.tv/claim/).
+> Pour valider la connexion avec Plex il faut accéder à l'interface en localhost : `ssh ip.address.of.server -L 32400:localhost:32400`
 
 ### Configuration Nextcloud
 

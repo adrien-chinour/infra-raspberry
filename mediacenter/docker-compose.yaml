@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     plex:
-        image: ghcr.io/linuxserver/plex:latest
+        image: ghcr.io/linuxserver/plex:bionic
         container_name: plex
         restart: unless-stopped
         ports:
