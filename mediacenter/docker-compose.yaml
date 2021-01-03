@@ -11,7 +11,7 @@ services:
             - "PGID=1200"
             - "TZ=Europe/Paris"
         volumes:
-            - plex:/config
+            - /home/mediacenter/plex:/config
             - /mediastorage/films:/data/movies
             - /mediastorage/series:/data/tv
         labels:
@@ -38,7 +38,7 @@ services:
             - "51413:51413"
             - "51413:51413/udp"
         volumes:
-            - transmission:/config
+            - /home/mediacenter/transmission:/config
             - ./config/settings.json:/config/settings.json
             - /mediastorage:/mediastorage
         labels:
@@ -63,7 +63,7 @@ services:
             - TZ=Europe/Paris
             - UMASK_SET=022 #optional
         volumes:
-            - radarr:/config
+            - /home/mediacenter/radarr:/config
             - /mediastorage/films:/movies
             - /mediastorage/downloads:/downloads
         ports:
@@ -90,7 +90,7 @@ services:
             - TZ=Europe/Paris
             - UMASK_SET=022 #optional
         volumes:
-            - sonarr:/config
+            - /home/mediacenter/sonarr:/config
             - /mediastorage/series:/tv
             - /mediastorage/downloads:/downloads
         ports:
@@ -118,7 +118,7 @@ services:
             - TZ=Europe/Paris
             - AUTO_UPDATE=true #optional
         volumes:
-            - jackett:/config
+            - /home/mediacenter/jackett:/config
             - /mediastorage/downloads:/downloads
         ports:
             - 9117:9117
@@ -140,13 +140,6 @@ services:
             - flaresolverr
         ports:
             - 8191:8191
-
-volumes:
-    radarr:
-    sonarr:
-    plex:
-    transmission:
-    jackett:
 
 networks:
     traefik_network:
