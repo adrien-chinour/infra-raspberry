@@ -67,8 +67,8 @@ api:
 
 ## A venir
 
-- [ ] Ajouter un middleware d'authentification pour les services mediacenter
-- [ ] Ajouter **Sonarr** et **Radarr**
+- [x] Ajouter un middleware d'authentification pour les services mediacenter
+- [x] Ajouter **Sonarr** et **Radarr**
 - [ ] Ajouter un service de partage (sur */mediastorage* pour profiter de transmission)
 - [ ] Ajouter un CLI pour administrer les services
 - [ ] Tableau de bord personnalisé (état des disques, accès aux services, accès aux logs)
