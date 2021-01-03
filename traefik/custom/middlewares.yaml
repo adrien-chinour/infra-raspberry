@@ -2,13 +2,16 @@ http:
     middlewares:
         security-headers:
             headers:
-                browserXssFilter: true
-                contentTypeNosniff: true
                 frameDeny: true
                 sslRedirect: true
+                browserXssFilter: true
+                contentTypeNosniff: true
+                forceSTSHeader: true
                 stsIncludeSubdomains: true
                 stsPreload: true
-                stsSeconds: 31536000
+                stsSeconds: 155520011
+                referrerPolicy: no-referrer
+                featurePolicy: true
                 customFrameOptionsValue: "SAMEORIGIN"
         https-redirect:
             redirectScheme:

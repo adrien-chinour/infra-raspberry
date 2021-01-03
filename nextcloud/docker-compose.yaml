@@ -1,42 +1,20 @@
 version: '3.7'
 services:
-    database:
-        image: jsurf/rpi-mariadb:latest
-        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-        restart: unless-stopped
-        environment:
-            PUID: '1300'
-            PGID: '1300'
-            TZ: 'Europe/Paris'
-            MYQL_RANDOM_ROOT_PASSWORD: 'yes'
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        networks:
-            - lan
-        volumes:
-            - db:/var/lib/mysql
 
     nextcloud:
-        depends_on:
-            - database
-        image: nextcloud:18
+        image: ghcr.io/linuxserver/nextcloud
+        container_name: nextcloud
         restart: unless-stopped
         environment:
-            PUID: '1300'
-            PGID: '1300'
-            TZ: 'Europe/Paris'
-            MYSQL_HOST: 'database'
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_HOST}
-        networks:
-            - lan
-            - traefik_network
+            - PUID=1300
+            - PGID=1300
+            - TZ=Europe/Paris
         volumes:
-            - html:/var/www/html
-            - /cloud:/var/www/html/data
+            - /home/nextcloud/config:/config
+            - /cloud:/data
+        networks:
+            - traefik_network
+            - lan
         labels:
             - "traefik.enable=true"
             - "traefik.docker.network=traefik_network"
@@ -45,13 +23,30 @@ services:
             - "traefik.http.routers.nextcloud.tls=true"
             - "traefik.http.routers.nextcloud.tls.certresolver=myresolver"
             - "traefik.http.routers.nextcloud.middlewares=nextcloud-dav"
-            - "traefik.http.services.nextcloud.loadbalancer.server.port=80"
+            - "traefik.http.services.nextcloud.loadbalancer.server.port=443"
+            - "traefik.http.services.nextcloud.loadbalancer.server.scheme=https"
             - "traefik.http.middlewares.nextcloud-dav.replacepathregex.regex=^/.well-known/ca(l|rd)dav"
             - "traefik.http.middlewares.nextcloud-dav.replacepathregex.replacement=/remote.php/dav/"
 
+    mariadb:
+        image: ghcr.io/linuxserver/mariadb
+        container_name: mariadb
+        restart: unless-stopped
+        networks:
+            - lan
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - TZ=Europe/Paris
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USERNAME}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        volumes:
+            - db:/config
+        ports:
+            - 3306:3306
+
 volumes:
     db:
-    html:
 
 networks:
     traefik_network:
