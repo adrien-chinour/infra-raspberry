@@ -42,7 +42,10 @@ services:
         volumes:
             - /home/mediacenter/transmission:/config
             - ./config/settings.json:/config/settings.json
-            - /mediastorage:/mediastorage
+            - /home/mediacenter/plex:/config
+            - /mediastorage/films:/movies
+            - /mediastorage/series:/tv
+            - /mediastorage/downloads:/downloads
         labels:
             - "traefik.enable=true"
             - "traefik.docker.network=traefik_network"
